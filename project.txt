@@ -57,3 +57,12 @@ npm install
     //make setting controller
     php artisan make:controller Admin\SettingController
     +//create view file of settings
+
+//Menu creating
+    php artisan make:model Models\Menu -m
+    define mutator
+    composer dump-autoload when any error found with seeding
+
+    menu crud
+    //define route
+

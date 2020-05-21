@@ -11,9 +11,7 @@ trait FileUpload
 {
     public function uploadOne(UploadedFile $file, $folder = null, $disk = 'public', $filename = null)
     {
-        $name = !is_null($filename) ? $filename : 'dudsf-'.Str::random(5
-
-            ).Carbon::now()->format('YmdHs');
+        $name = !is_null($filename) ? $filename : 'dudsf.'.Carbon::now()->format('YmdHs');
         return $file->storeAs(
             $folder,
             $name.".".$file->getClientOriginalExtension(),

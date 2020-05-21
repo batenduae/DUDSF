@@ -4,12 +4,13 @@ namespace App\Traits;
 
 trait FlashMessages
 {
+
     protected $errorMessages = [];
     protected $infoMessages = [];
     protected $successMessages = [];
     protected $warningMessages = [];
 
-    protected function setFlashMessages ($message, $type)
+    protected function setFlashMessages($message, $type)
     {
         $model = 'infoMessages';
 
@@ -33,16 +34,18 @@ trait FlashMessages
         }
 
         if (is_array($message)) {
-            foreach ($message as $key=>$value)
+            foreach ($message as $key => $value)
             {
-                array_push($this->model, $value);
+                array_push($this->$model, $value);
             }
         } else {
-            array_push($this->model, $message);
+            array_push($this->$model, $message);
         }
-
     }
 
+    /**
+     * @return array
+     */
     protected function getFlashMessages()
     {
         return [
@@ -53,11 +56,14 @@ trait FlashMessages
         ];
     }
 
+    /**
+     * Flushing flash messages to Laravel's session
+     */
     protected function showFlashMessages()
     {
-        session()->flash('error',$this->errorMessages);
-        session()->flash('info',$this->infoMessages);
-        session()->flash('success',$this->successMessages);
-        session()->flash('warning',$this->warningMessages);
+        session()->flash('error', $this->errorMessages);
+        session()->flash('info', $this->infoMessages);
+        session()->flash('success', $this->successMessages);
+        session()->flash('warning', $this->warningMessages);
     }
 }
