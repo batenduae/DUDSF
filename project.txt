@@ -32,5 +32,5 @@ npm install
 
 //Now define two functions .
     //If Authenticated --redirect to dashboard in Middleware redirectIfAuthenticated
-    //If not logged in then prevent entering into dashboard & redirect to login page
+    //If not logged in then prevent entering into dashboard & redirect to login page so add function
 
