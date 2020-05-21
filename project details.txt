@@ -1,0 +1,4 @@
+//fresh laravel installation
+composer create-project --prefer-dist laravel/laravel dudsf-web
+
+//
