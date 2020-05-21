@@ -1,3 +1,4 @@
+@if(Auth::check())
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,7 @@
     @include('admin.partials.header')
     @include('admin.partials.sidebar')
     <main class="app-content" id="app">
-        @yield('page-content')
+        @yield('content')
     </main>
 
     <script type="text/javascript" src="{{asset('/backend/js/jquery-3.3.1.min.js')}}"></script>
@@ -23,3 +24,6 @@
     <script type="text/javascript" src="{{asset('/backend/js/plugins/pace.min.js')}}"></script>
     @stack('scripts')
 </body>
+@else
+    404
+@endif

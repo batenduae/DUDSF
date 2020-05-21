@@ -13,6 +13,14 @@
     <div class="cover"></div>
 </section>
 <section class="login-content">
+    @if ($errors)
+        @foreach($errors as $key => $value)
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button class="close" type="button" data-dismiss="alert">×</button>
+                <strong>Error!</strong> {{ $value }}
+            </div>
+        @endforeach
+    @endif
     <div class="logo">
         <h1>{{ config('app.name') }}</h1>
     </div>

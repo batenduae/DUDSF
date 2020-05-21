@@ -16,6 +16,9 @@ npm install
 
 //create database in phpmyadmin and edit .env file
 
+
+
+
 //Create Admin Table
     php artisan make:model Models\Admin -m
     php artisan make:seed AdminsTableSeeder
@@ -34,3 +37,23 @@ npm install
     //If Authenticated --redirect to dashboard in Middleware redirectIfAuthenticated
     //If not logged in then prevent entering into dashboard & redirect to login page so add function
 
+
+
+
+
+//Backend Settings
+    //FlashMessageTraits
+    //DUDSFController
+    //BaseContract
+    //BaseRepository
+    //Create Model for Settings
+        php artisan make:model Models\Setting -m
+        php artisan make:seed SettingsTableSeeder
+
+    Here Set initial settings
+    php artisan make:provider SettingServiceProvider
+    App\Providers\SettingServiceProvider::class,
+    //define register & boot function
+    //make setting controller
+    php artisan make:controller Admin\SettingController
+    +//create view file of settings
