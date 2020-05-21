@@ -1,0 +1,36 @@
+//fresh installation of laravel
+composer create-project --prefer-dist laravel/laravel dudsf-web
+
+//fresh vue-auth scaffolding
+composer require laravel ui
+php artisan ui vue --auth
+
+//node modules installation
+npm install
+
+//mastering the backend
+
+//change default model location to App\Models and config it in config.auth
+
+//Create Contracts, Repositories, Traits in app folder
+
+//create database in phpmyadmin and edit .env file
+
+//Create Admin Table
+    php artisan make:model Models\Admin -m
+    php artisan make:seed AdminsTableSeeder
+
+    //Edit migration file , seed, Model file
+
+    //Run the migration with seed
+    php artisan migrate --seed
+
+//Create Admin Guard And Authentication
+    //Edit config.auth and add provider class, edit guard, passwords,
+
+//Create Admin\LoginController and define routes in group with prefix and make view file
+
+//Now define two functions .
+    //If Authenticated --redirect to dashboard in Middleware redirectIfAuthenticated
+    //If not logged in then prevent entering into dashboard & redirect to login page
+
