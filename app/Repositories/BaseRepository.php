@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Contract\BaseContract;
+use App\Contracts\BaseContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 

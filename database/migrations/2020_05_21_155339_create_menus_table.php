@@ -8,7 +8,7 @@ class CreateMenusTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * featured means published
      * @return void
      */
     public function up()
@@ -19,8 +19,8 @@ class CreateMenusTable extends Migration
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->unsignedInteger('parent_id')->default(1)->nullable();
-            $table->boolean('featured')->default(0);
-            $table->boolean('activeStatus')->default(1);
+            $table->boolean('featured')->default(1);
+            $table->boolean('menu')->default(1);
             $table->integer('order')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();

@@ -10,13 +10,13 @@ class Menu extends Model
     protected $table = 'menus';
 
     protected $fillable = [
-        'name', 'slug', 'description', 'parent_id', 'featured', 'activeStatus', 'order', 'image'
+        'name', 'slug', 'description', 'parent_id', 'featured', 'menu', 'order', 'image'
     ];
 
     protected $casts = [
         'parent_id'     =>  'integer',
         'featured'      =>  'boolean',
-        'activeStatus'  =>  'boolean',
+        'menu'          =>  'boolean',
         'order'         =>  'integer'
     ];
 

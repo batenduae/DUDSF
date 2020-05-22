@@ -65,4 +65,7 @@ npm install
 
     menu crud
     //define route
+    //define contract,repository
+    //php artisan make:provider RepositoryServiceProvider
+    //menu controller
 
