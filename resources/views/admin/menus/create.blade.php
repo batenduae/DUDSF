@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" id="featured" name="featured"/>Featured Menu
+                                    <input class="form-check-input" type="checkbox" id="featured" name="featured" checked/>Featured Menu
                                 </label>
                             </div>
                         </div>

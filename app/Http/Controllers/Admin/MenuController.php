@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contracts\MenuContract;
 use App\Http\Controllers\BaseController;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
 class MenuController extends BaseController
@@ -35,6 +36,8 @@ class MenuController extends BaseController
             'parent_id' =>  'required|not_in:0',
             'image'     =>  'mimes:jpg,jpeg,png|max:1000'
         ]);
+        $maxOrder = Menu::where('parent_id',$request->parent_id)->max('order');
+        $request->request->add(['order' => $maxOrder+1]);
         $params = $request->except('_token');
         $menu = $this->menuRepository->createMenu($params);
         if(!$menu) {
@@ -58,6 +61,10 @@ class MenuController extends BaseController
             'parent_id' =>  'required|not_in:0',
             'image'     =>  'mimes:jpg,jpeg,png|max:1000'
         ]);
+        if (Menu::where('id',$request->id)->first()->order == null){
+            $maxOrder = Menu::where('parent_id',$request->parent_id)->max('order');
+            $request->request->add(['order' => $maxOrder+1]);
+        }
         $params = $request->except('_token');
         $menu = $this->menuRepository->updateMenu($params);
         if(!$menu) {
@@ -75,5 +82,26 @@ class MenuController extends BaseController
         return $this->responseRedirect('admin.menus.index','Menu deleted successfully.','success',false,false);
     }
 
-
+    public function changeFeature($id)
+    {
+        $menu = $this->menuRepository->findMenuById($id);
+        if ($menu->featured == 1){
+            $menu->featured = 0;
+        } else {
+            $menu->featured = 1;
+        }
+        $menu->save();
+        return $this->responseRedirectBack('Updated successfully','success',true,true);
+    }
+    public function changeStatus($id)
+    {
+        $menu = $this->menuRepository->findMenuById($id);
+        if ($menu->menu == 1){
+            $menu->menu = 0;
+        } else {
+            $menu->menu = 1;
+        }
+        $menu->save();
+        return $this->responseRedirectBack('Updated successfully','success',true,true);
+    }
 }

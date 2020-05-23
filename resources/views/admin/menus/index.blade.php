@@ -61,7 +61,7 @@
                                         <div class="btn-group" role="group" aria-label="Second group">
                                             <a href="{{ route('admin.menus.edit', $menu->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                             @if(Auth::user()->adminType == 'superAdmin')
-                                                <a href="{{ route('admin.menus.delete', $menu->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ route('admin.menus.delete', $menu->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure? If deleted once data can not be retrieve')"><i class="fa fa-trash"></i></a>
                                             @endif
                                         </div>
                                     </td>

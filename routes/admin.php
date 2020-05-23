@@ -30,5 +30,18 @@ Route::group(['prefix'  =>  'admin'], function () {
 
         });
 
+        Route::group(['prefix'  =>   'members'], function() {
+            Route::get('/', 'Admin\MenuController@index')->name('admin.menus.index');
+            Route::get('/create', 'Admin\MenuController@create')->name('admin.menus.create');
+            Route::post('/store', 'Admin\MenuController@store')->name('admin.menus.store');
+            Route::get('/{id}/edit', 'Admin\MenuController@edit')->name('admin.menus.edit');
+            Route::post('/update', 'Admin\MenuController@update')->name('admin.menus.update');
+            Route::get('/{id}/delete', 'Admin\MenuController@delete')->name('admin.menus.delete');
+            Route::get('/{id}/changeFeature', 'Admin\MenuController@changeFeature')->name('admin.menus.changeFeature');
+            Route::get('/{id}/changeStatus', 'Admin\MenuController@changeStatus')->name('admin.menus.changeStatus');
+
+        });
+
+
     });
 });

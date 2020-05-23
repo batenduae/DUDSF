@@ -25,11 +25,11 @@ class Menu extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
-    public function setParentIdAttribute($value){
-        $this->attributes['parent_id'] = $value;
-        $maxOrder = Menu::where('parent_id',$value)->max('order');
-        $this->attributes['order'] = $maxOrder+1;
-    }
+//    public function setParentIdAttribute($value){
+//        $this->attributes['parent_id'] = $value;
+//        $maxOrder = Menu::where('parent_id',$value)->max('order');
+//        $this->attributes['order'] = $maxOrder+1;
+//    }
 
     public function parent()
     {
