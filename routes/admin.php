@@ -22,26 +22,34 @@ Route::group(['prefix'  =>  'admin'], function () {
             Route::get('/', 'Admin\MenuController@index')->name('admin.menus.index');
             Route::get('/create', 'Admin\MenuController@create')->name('admin.menus.create');
             Route::post('/store', 'Admin\MenuController@store')->name('admin.menus.store');
-            Route::get('/{id}/edit', 'Admin\MenuController@edit')->name('admin.menus.edit');
+            Route::get('/edit/{id}', 'Admin\MenuController@edit')->name('admin.menus.edit');
             Route::post('/update', 'Admin\MenuController@update')->name('admin.menus.update');
-            Route::get('/{id}/delete', 'Admin\MenuController@delete')->name('admin.menus.delete');
-            Route::get('/{id}/changeFeature', 'Admin\MenuController@changeFeature')->name('admin.menus.changeFeature');
-            Route::get('/{id}/changeStatus', 'Admin\MenuController@changeStatus')->name('admin.menus.changeStatus');
+            Route::get('/delete/{id}', 'Admin\MenuController@delete')->name('admin.menus.delete');
+
+            Route::get('/action/{action}/{item}/{id?}', 'Admin\MenuController@actionOnMenu')->name('admin.menus.action');
+
 
         });
 
         Route::group(['prefix'  =>   'members'], function() {
-            Route::get('/', 'Admin\MenuController@index')->name('admin.menus.index');
-            Route::get('/create', 'Admin\MenuController@create')->name('admin.menus.create');
-            Route::post('/store', 'Admin\MenuController@store')->name('admin.menus.store');
-            Route::get('/{id}/edit', 'Admin\MenuController@edit')->name('admin.menus.edit');
-            Route::post('/update', 'Admin\MenuController@update')->name('admin.menus.update');
-            Route::get('/{id}/delete', 'Admin\MenuController@delete')->name('admin.menus.delete');
-            Route::get('/{id}/changeFeature', 'Admin\MenuController@changeFeature')->name('admin.menus.changeFeature');
-            Route::get('/{id}/changeStatus', 'Admin\MenuController@changeStatus')->name('admin.menus.changeStatus');
+            Route::get('/', 'Admin\MemberController@index')->name('admin.members.index');
+            Route::get('/create', 'Admin\MemberController@create')->name('admin.members.create');
+            Route::post('/store', 'Admin\MemberController@store')->name('admin.members.store');
+            Route::get('/{id}/edit', 'Admin\MemberController@edit')->name('admin.members.edit');
+            Route::post('/update', 'Admin\MemberController@update')->name('admin.members.update');
+            Route::get('/{id}/delete', 'Admin\MemberController@delete')->name('admin.members.delete');
+
+            Route::get('/action/{action}/{item}/{id?}', 'Admin\MemberController@actionOnMember')->name('admin.members.action');
+
+            Route::get('/editAll', 'Admin\MemberController@indexEditAll')->name('admin.members.indexEditAll');
+            Route::get('/getRegLoginId', 'Admin\MemberController@getRegLoginId')->name('admin.members.getRegLoginId');
+
+            Route::get('/mail/{email}/{name}/{registrationId}/{loginId}', 'Admin\MemberController@sendMail')->name('admin.members.mail');
+            Route::get('/sendMailAll', 'Admin\MemberController@sendMailAll')->name('admin.members.sendMailAll');
+
+
 
         });
-
 
     });
 });

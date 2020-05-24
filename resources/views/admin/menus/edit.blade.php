@@ -60,9 +60,9 @@
                             <div class="row">
                                 <div class="col-3">
                                     @if ($targetMenu->image != null)
-                                        <img src="{{ asset('/storage/'.$targetMenu->image) }}" id="logoImg" style="width: 80px; height: auto;">
+                                        <img src="{{ asset('/storage/'.$targetMenu->image) }}" id="menuImg" style="width: 80px; height: auto;">
                                     @else
-                                        <img src="{{asset('/storage/settings/default.png')}}" id="logoImg" style="width: 80px; height: auto;">
+                                        <img src="{{asset('/storage/settings/default.png')}}" id="menuImg" style="width: 80px; height: auto;">
                                     @endif
                                 </div>
                                 <div class="col-9">
@@ -70,7 +70,7 @@
                                         <label class="control-label">Menu Image</label>
                                         <input class="form-control @error('image') is-invalid @enderror"
                                                type="file" id="image" name="image"
-                                               onchange="runMultipleFunction(event, 'logoImg', 'image','hideImageDelButton');"
+                                               onchange="runMultipleFunction(event, 'menuImg', 'image','hideImageDelButton');"
                                         />
                                         @error('image') {{ $message }} @enderror
                                     </div>

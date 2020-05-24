@@ -36,8 +36,10 @@ class MenuController extends BaseController
             'parent_id' =>  'required|not_in:0',
             'image'     =>  'mimes:jpg,jpeg,png|max:1000'
         ]);
+
         $maxOrder = Menu::where('parent_id',$request->parent_id)->max('order');
         $request->request->add(['order' => $maxOrder+1]);
+
         $params = $request->except('_token');
         $menu = $this->menuRepository->createMenu($params);
         if(!$menu) {
@@ -82,26 +84,39 @@ class MenuController extends BaseController
         return $this->responseRedirect('admin.menus.index','Menu deleted successfully.','success',false,false);
     }
 
-    public function changeFeature($id)
+    public function actionOnMenu($action,$item,$id = null)
     {
-        $menu = $this->menuRepository->findMenuById($id);
-        if ($menu->featured == 1){
-            $menu->featured = 0;
-        } else {
-            $menu->featured = 1;
+        switch ($action){
+            case 'up':
+                $value = 1;
+                break;
+            case 'down':
+                $value = 0;
+                break;
         }
-        $menu->save();
-        return $this->responseRedirectBack('Updated successfully','success',true,true);
-    }
-    public function changeStatus($id)
-    {
-        $menu = $this->menuRepository->findMenuById($id);
-        if ($menu->menu == 1){
-            $menu->menu = 0;
-        } else {
-            $menu->menu = 1;
+        switch ($id){
+            case is_numeric($id):{
+                    $justMenu = $this->menuRepository->findMenuById($id);
+                    $menus = [$justMenu];
+                } break;
+            case 'all':
+                $menus = $this->menuRepository->all();
+                break;
+            default:
+                return $this->responseRedirectBack('Nothing Changed','warning',true,true);
+                break;
         }
-        $menu->save();
+        foreach ($menus as $menu){
+            switch ($item){
+                case 'featured':
+                    $menu->featured = $value;
+                    break;
+                case 'menu':
+                    $menu->menu = $value;
+                    break;
+            }
+            $menu->save();
+        }
         return $this->responseRedirectBack('Updated successfully','success',true,true);
     }
 }

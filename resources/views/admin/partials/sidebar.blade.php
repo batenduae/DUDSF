@@ -28,6 +28,12 @@
                     <span class="app-menu__label">Menus</span>
                 </a>
             </li>
+            <li>
+                <a class="app-menu__item {{ Route::currentRouteName() == 'admin.members.index' ? 'active' : '' }}" href="{{ route('admin.members.index') }}">
+                    <i class="app-menu__icon fa fa-user"></i>
+                    <span class="app-menu__label">Members</span>
+                </a>
+            </li>
         @endif
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">UI Elements</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">

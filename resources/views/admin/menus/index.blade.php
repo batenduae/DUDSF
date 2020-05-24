@@ -7,6 +7,24 @@
             <p>{{ $subTitle }}</p>
         </div>
         @if(Auth::user()->adminType == 'superAdmin')
+            <span>
+                <span>Featured:&nbsp;&nbsp;
+                    <a href="{{ route('admin.menus.action',['up','featured','all']) }}" class="badge badge-success">
+                        <i class="fa fa-cloud-upload"></i>
+                    </a>
+                    <a href="{{ route('admin.menus.action',['down','featured','all']) }}" class="badge badge-danger">
+                        <i class="fa fa-cloud-download"></i>
+                    </a>
+                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>Menu:&nbsp;&nbsp;
+                    <a href="{{ route('admin.menus.action',['up','menu','all']) }}" class="badge badge-success">
+                        <i class="fa fa-cloud-upload"></i>
+                    </a>
+                    <a href="{{ route('admin.menus.action',['down','menu','all']) }}" class="badge badge-danger">
+                        <i class="fa fa-cloud-download"></i>
+                    </a>
+                </span>
+            </span>
             <a href="{{ route('admin.menus.create') }}" class="btn btn-primary pull-right">Add Menu</a>
         @endif
     </div>
@@ -38,20 +56,24 @@
                                     <td>{{ $menu->parent->name }}</td>
                                     <td class="text-center">
                                         @if ($menu->featured == 1)
-                                            <span class="badge badge-success">Yes</span>
-                                            <a href="{{ route('admin.menus.changeFeature', $menu->id) }}" class="badge badge-success"><i class="fa fa-cloud-upload"></i></a>
+                                            <span class="badge badge-info">Yes</span>
+                                            <a href="{{ route('admin.menus.action', ['down','featured',$menu->id]) }}" class="badge badge-danger">
+                                                <i class="fa fa-cloud-download"></i></a>
                                         @else
-                                            <span class="badge badge-danger">No</span>
-                                            <a href="{{ route('admin.menus.changeFeature', $menu->id) }}" class="badge badge-warning"><i class="fa fa-cloud-download"></i></a>
+                                            <span class="badge badge-warning">No</span>
+                                            <a href="{{ route('admin.menus.action', ['up','featured',$menu->id]) }}" class="badge badge-success">
+                                                <i class="fa fa-cloud-upload"></i></a>
                                         @endif
                                     </td>
                                     <td class="text-center">
                                         @if ($menu->menu == 1)
-                                            <span class="badge badge-success">Visible</span>
-                                            <a href="{{ route('admin.menus.changeStatus', $menu->id) }}" class="badge badge-success"><i class="fa fa-eye"></i></a>
+                                            <span class="badge badge-info">Visible</span>
+                                            <a href="{{ route('admin.menus.action', ['down','menu',$menu->id]) }}" class="badge badge-danger">
+                                                <i class="fa fa-eye-slash"></i></a>
                                         @else
-                                            <span class="badge badge-danger">Hidden</span>
-                                            <a href="{{ route('admin.menus.changeStatus', $menu->id) }}" class="badge badge-warning"><i class="fa fa-eye-slash"></i></a>
+                                            <span class="badge badge-warning">Hidden</span>
+                                            <a href="{{ route('admin.menus.action', ['up','menu',$menu->id]) }}" class="badge badge-success">
+                                                <i class="fa fa-eye"></i></a>
                                         @endif
                                     </td>
                                     <td class="text-center">

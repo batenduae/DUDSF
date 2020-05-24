@@ -49,13 +49,13 @@
                         </div>
                         <div class="row">
                             <div class="col-3">
-                                <img src="{{asset('/storage/settings/default.png')}}" id="logoImg" style="width: 80px; height: auto;">
+                                <img src="{{asset('/storage/settings/default.png')}}" id="menuImg" style="width: 80px; height: auto;">
                             </div>
                             <div class="col-9">
                                 <div class="form-group">
                                     <label class="control-label">Menu Image</label>
                                     <input class="form-control @error('image') is-invalid @enderror"
-                                    type="file" id="image" name="image" onchange="loadFile(event,'logoImg')"/>
+                                    type="file" id="image" name="image" onchange="loadFile(event,'menuImg')"/>
                                     @error('image') {{ $message }} @enderror
                                 </div>
                             </div>

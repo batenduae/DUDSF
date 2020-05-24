@@ -43,6 +43,7 @@ class MenuRepository extends BaseRepository implements MenuContract
             }
             $featured = $collection->has('featured') ? 1 : 0;
             $menu = $collection->has('menu') ? 1 : 0;
+
             $mergeData = $collection->merge(compact('menu','image','featured'));
             $newMenu = new Menu($mergeData->all());
             $newMenu->save();
@@ -55,29 +56,29 @@ class MenuRepository extends BaseRepository implements MenuContract
     public function updateMenu(array $params)
     {
         try {
-            $newMenu = $this->findMenuById($params['id']);
-            $collection = collect($params)->except('delete');;
+            $oldMenu = $this->findMenuById($params['id']);
+            $collection = collect($params)->except('delete');
             $delete = collect($params)->only('delete')->has('delete') ? 1 : 0;
-            $image = $newMenu->image;
+            $image = $oldMenu->image;
             if (!($collection->has('image') && ($params['image'] instanceof UploadedFile))) {
                 if ($delete){
                     if ($image != null) {
-                        $this->deleteOne($newMenu->image);
+                        $this->deleteOne($oldMenu->image);
                     }
                     $image = null;
                 }
             }
             if ($collection->has('image') && ($params['image'] instanceof UploadedFile)) {
-                if ($newMenu->image != null){
-                    $this->deleteOne($newMenu->image);
+                if ($oldMenu->image != null){
+                    $this->deleteOne($oldMenu->image);
                 }
                 $image = $this->uploadOne($params['image'],'menus');
             }
             $featured = $collection->has('featured') ? 1 : 0;
             $menu = $collection->has('menu') ? 1 : 0;
             $mergeData = $collection->merge(compact('menu','image','featured'));
-            $newMenu->update($mergeData->all());
-            return $newMenu;
+            $oldMenu->update($mergeData->all());
+            return $oldMenu;
         } catch (QueryException $exception){
             throw new InvalidArgumentException($exception->getMessage());
         }

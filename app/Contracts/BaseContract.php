@@ -13,5 +13,4 @@ interface BaseContract
     public function findOneBy(array $data);
     public function findOneByOrFail(array $data);
     public function delete(int $id);
-
 }
