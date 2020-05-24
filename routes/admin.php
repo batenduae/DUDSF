@@ -49,6 +49,13 @@ Route::group(['prefix'  =>  'admin'], function () {
 
             Route::group(['prefix'  =>   'profile'], function() {
                 Route::get('/edit/{id}', 'Admin\MemberController@editProfile')->name('admin.members.profiles.editProfile');
+
+                Route::group(['prefix'  =>   'image'], function() {
+                    Route::post('/get', 'Admin\Member\ImageController@get');
+                    Route::post('/add', 'Admin\Member\ImageController@add');
+                    Route::post('/update', 'Admin\Member\ImageController@update');
+                    Route::post('/delete', 'Admin\Member\ImageController@delete');
+                });
             });
         });
     });

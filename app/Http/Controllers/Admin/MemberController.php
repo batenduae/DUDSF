@@ -189,7 +189,7 @@ class MemberController extends BaseController
     {
         $targetMember = $this->memberRepository->findMemberById($id);
         $members = $this->memberRepository->listMembers();
-        $this->setPageTitle('Members','Edit Member\'s Profile: '.$targetMember->name);
+        $this->setPageTitle('Member','Edit Member\'s Profile: '.$targetMember->name);
         return view('admin.members.profiles.index',compact('members','targetMember'));
     }
 
