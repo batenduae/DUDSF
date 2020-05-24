@@ -35,21 +35,21 @@ Route::group(['prefix'  =>  'admin'], function () {
             Route::get('/', 'Admin\MemberController@index')->name('admin.members.index');
             Route::get('/create', 'Admin\MemberController@create')->name('admin.members.create');
             Route::post('/store', 'Admin\MemberController@store')->name('admin.members.store');
-            Route::get('/{id}/edit', 'Admin\MemberController@edit')->name('admin.members.edit');
+            Route::get('/edit/{id}', 'Admin\MemberController@edit')->name('admin.members.edit');
             Route::post('/update', 'Admin\MemberController@update')->name('admin.members.update');
-            Route::get('/{id}/delete', 'Admin\MemberController@delete')->name('admin.members.delete');
+            Route::get('/delete/{id}', 'Admin\MemberController@delete')->name('admin.members.delete');
 
             Route::get('/action/{action}/{item}/{id?}', 'Admin\MemberController@actionOnMember')->name('admin.members.action');
 
             Route::get('/editAll', 'Admin\MemberController@indexEditAll')->name('admin.members.indexEditAll');
             Route::get('/getRegLoginId', 'Admin\MemberController@getRegLoginId')->name('admin.members.getRegLoginId');
 
-            Route::get('/mail/{email}/{name}/{registrationId}/{loginId}', 'Admin\MemberController@sendMail')->name('admin.members.mail');
-            Route::get('/sendMailAll', 'Admin\MemberController@sendMailAll')->name('admin.members.sendMailAll');
+            Route::get('/mail/{email}/{name}/{registrationId}/{loginId}', 'Admin\MemberController@sendLoginIdMail')->name('admin.members.sendLoginIdMail');
+            Route::get('/sendMailAll', 'Admin\MemberController@sendLoginIdMailAll')->name('admin.members.sendLoginIdMailAll');
 
-
-
+            Route::group(['prefix'  =>   'profile'], function() {
+                Route::get('/edit/{id}', 'Admin\MemberController@editProfile')->name('admin.members.profiles.editProfile');
+            });
         });
-
     });
 });

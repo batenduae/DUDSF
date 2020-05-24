@@ -40,8 +40,8 @@ class MemberController extends BaseController
             'image'     =>  'mimes:jpg,jpeg,png|max:1000'
         ]);
 
-        $registrationId = 'dudsf@'.Carbon::now()->format('YmdHs').Str::random(5);
-        $loginId = 'dudsf:'.(Carbon::now()->format('YmdHs')+1500).'-'.Str::random(10);
+        $registrationId = 'dudsf@reg@'.Carbon::now()->format('YmdHs').Str::random(5);
+        $loginId = 'dudsf@login@:'.(Carbon::now()->format('YmdHs')+1534).'-'.Str::random(10);
         $request->request->add(['registrationId' => $registrationId]);
         $request->request->add(['loginId' => $loginId]);
 
@@ -151,20 +151,20 @@ class MemberController extends BaseController
         return view('admin.members.getRegLoginId',compact('members'));
     }
 
-    public function sendMail($email,$name,$registrationId,$loginId)
+    public function sendLoginIdMail($email,$name,$registrationId,$loginId)
     {
         $to_name = $name;
         $to_email = $email;
         $data = array('name'=>$name, 'registrationId'=>$registrationId,'loginId'=>$loginId);
 
-        Mail::send('admin.emails.mail', $data, function($message) use ($to_name, $to_email) {
+        Mail::send('admin.emails.sendLoginIdMail', $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)
                 ->subject('Registration Id & Login ID');
             $message->from('dudsf.org@gmail.com','DUDSF');
         });
         return $this->responseRedirectBack('Mail Send successfully','success',true,true);
     }
-    public function sendMailAll()
+    public function sendLoginIdMailAll()
     {
         $members = $members = $this->memberRepository->listMembers();
         foreach ($members as $member)
@@ -175,7 +175,7 @@ class MemberController extends BaseController
                 $to_email = $member->email;
                 $data = array('name'=>$member->name, 'registrationId'=>$member->registrationId,'loginId'=>$member->loginId);
 
-                Mail::send('admin.emails.mail', $data, function($message) use ($to_name, $to_email) {
+                Mail::send('admin.emails.sendLoginIdMail', $data, function($message) use ($to_name, $to_email) {
                     $message->to($to_email, $to_name)
                         ->subject('Registration Id & Login ID');
                     $message->from('dudsf.org@gmail.com','DUDSF');
@@ -183,6 +183,14 @@ class MemberController extends BaseController
             }
         }
         return $this->responseRedirectBack('Mail Send successfully','success',true,true);
+    }
+
+    public function editProfile($id)
+    {
+        $targetMember = $this->memberRepository->findMemberById($id);
+        $members = $this->memberRepository->listMembers();
+        $this->setPageTitle('Members','Edit Member\'s Profile: '.$targetMember->name);
+        return view('admin.members.profiles.index',compact('members','targetMember'));
     }
 
 }

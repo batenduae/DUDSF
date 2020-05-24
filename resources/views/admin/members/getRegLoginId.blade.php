@@ -7,7 +7,7 @@
             <p>{{ $subTitle }}</p>
         </div>
         @if(Auth::user()->adminType == 'superAdmin')
-            <a href="{{ route('admin.members.sendMailAll') }}" class="btn btn-primary ">Send Mail to All</a>
+            <a href="{{ route('admin.members.sendLoginIdMailAll') }}" class="btn btn-primary ">Send Mail to All</a>
 
         @endif
     </div>
@@ -41,7 +41,7 @@
                                 @endif
                                 <td>{{ $member->email }}
                                     @if($member->email != null)
-                                        <a href="{{route('admin.members.mail',[$member->email,$member->name,$member->registrationId,$member->loginId]) }}"><i class="fa fa-envelope" aria-hidden="true">Send Mail</i></a>
+                                        <a href="{{route('admin.members.sendLoginIdMail',[$member->email,$member->name,$member->registrationId,$member->loginId]) }}"><i class="fa fa-envelope" aria-hidden="true">Send Mail</i></a>
                                     @endif
                                 </td>
                                 <td>{{ $member->registrationId }}</td>

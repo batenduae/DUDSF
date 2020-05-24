@@ -3,14 +3,22 @@
 @section('content')
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
+            <h1><i class="fa fa-shopping-bag"></i> {{ $pageTitle }} - {{ $subTitle }}</h1>
         </div>
     </div>
     @include('admin.partials.flash')
     <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="tile">
-                <h3 class="tile-title">{{ $subTitle }}</h3>
+        <div class="col-md-3">
+            <div class="tile p-0">
+                <ul class="nav flex-column nav-tabs user-tabs">
+                    <li class="nav-item"><a class="nav-link active" href="#general" data-toggle="tab">General</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9 mx-auto">
+            <div class="tab-content">
+                <div class="tab-pane active" id="general">
+                    <div class="tile">
                 <form action="{{ route('admin.members.update') }}" method="POST" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="tile-body">
@@ -142,6 +150,8 @@
                             <i class="fa fa-fw fa-lg fa-arrow-circle-left"></i>Go Back</a>
                     </div>
                 </form>
+            </div>
+                </div>
             </div>
         </div>
     </div>

@@ -69,3 +69,34 @@ npm install
     //php artisan make:provider RepositoryServiceProvider
     //menu controller
 
+//Member creating
+    define mutator
+    define custom generated value in controller
+    create contract & repository
+    bind with repository service provider
+    //Generate mail system//
+        //config mail.php, env file mail, create Mail function in controller and route
+
+    //generate some model for member profile
+    //member login
+    //member image
+    //member address
+    //member univ info
+    //member edu back info
+    //member profile
+    //member job info
+    //member personal
+    //member login log page
+    //member profile
+
+    //define migration table , model, relation between them.
+
+
+//Member Profile edit page.
+    //vue swal, webpack mix.js configuration, popper.min.js.map download, vue install run npm install
+    //now create view file, route, vue component
+    //
+
+
+
+

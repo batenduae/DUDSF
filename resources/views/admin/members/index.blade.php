@@ -8,7 +8,7 @@
         </div>
         @if(Auth::user()->adminType == 'superAdmin')
             <a href="{{ route('admin.members.indexEditAll') }}" class="btn btn-primary ">Edit Members</a>
-            <a href="{{ route('admin.members.getRegLoginId') }}" class="btn btn-primary ">Get Members Reg,Login Id</a>
+            <a href="{{ route('admin.members.getRegLoginId') }}" class="btn btn-primary ">Get Reg,Login Id</a>
         @endif
         <span>
             <span>Member:&nbsp;&nbsp;
@@ -58,7 +58,7 @@
                                 </td>
                                 <td class="text-center">
                                     @if ($member->display == 1)
-                                        <span class="badge badge-info">Yes</span>
+                                        <span class="badge">Yes</span>
                                         <a href="{{ route('admin.members.action',['down','display',$member->id]) }}" class="badge badge-danger"><i class="fa fa-cloud-download"></i></a>
                                     @else
                                         <span class="badge badge-warning">No</span>
@@ -76,6 +76,7 @@
                                     <div class="btn-group" role="group" aria-label="Second group">
                                         <a href="{{ route('admin.members.edit', $member->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                         @if(Auth::user()->adminType == 'superAdmin')
+                                            <a href="{{ route('admin.members.profiles.editProfile', $member->id) }}" class="btn btn-sm btn-success" ><i class="fa fa-pencil"></i></a>
                                             <a href="{{ route('admin.members.delete', $member->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure? If deleted once data can not be retrieve')"><i class="fa fa-trash"></i></a>
                                         @endif
                                     </div>

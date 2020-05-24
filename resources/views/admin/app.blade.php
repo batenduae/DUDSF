@@ -6,9 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{asset('/backend/css/main.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/backend/css/fontawesome-5.7.0.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/backend/css/font-awesome/4.7.0/css/font-awesome.min.css')}}">
+    @stack('style')
 </head>
 <body class="app sidebar-mini">
     @include('admin.partials.header')
