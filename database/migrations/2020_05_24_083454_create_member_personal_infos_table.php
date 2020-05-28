@@ -15,8 +15,8 @@ class CreateMemberPersonalInfosTable extends Migration
     {
         Schema::create('member_personal_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id')->unique();
-
+            $table->unsignedBigInteger('member_id')->unique()->index();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->boolean('married')->default(0);
             $table->string('marriage_status')->nullable();
             $table->string('spouse_name')->nullable();

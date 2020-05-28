@@ -15,7 +15,8 @@ class CreateMemberAddressesTable extends Migration
     {
         Schema::create('member_addresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id')->unique();
+            $table->unsignedBigInteger('member_id')->unique()->index();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             //Permanent Address
             $table->string('p_country')->nullable();
             $table->string('p_division')->nullable();

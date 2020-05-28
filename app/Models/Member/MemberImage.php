@@ -21,5 +21,6 @@ class MemberImage extends Model
 
     public function member(){
         return $this->belongsTo(Member::class,'id','member_id');
+//        return $this->belongsTo(Member::class);
     }
 }

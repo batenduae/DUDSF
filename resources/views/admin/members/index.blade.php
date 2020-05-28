@@ -89,6 +89,11 @@
             </div>
         </div>
     </div>
+    <data-table
+        url="/"
+        :per-page="perPage"
+        :columns="columns">
+    </data-table>
 @endsection
 @push('scripts')
     <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>

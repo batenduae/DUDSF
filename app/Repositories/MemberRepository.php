@@ -38,7 +38,7 @@ class MemberRepository extends BaseRepository implements MemberContract
             $collection = collect($params);
             $image = null;
             if($collection->has('image') && ($params['image'] instanceof UploadedFile)){
-                $image =  $this->uploadOne($params['image'],'member');
+                $image =  $this->uploadOne($params['image'],'members');
             }
             if($collection->has('membership')){
                 $membership = 1;
@@ -80,7 +80,7 @@ class MemberRepository extends BaseRepository implements MemberContract
                 if ($oldMember->image != null){
                     $this->deleteOne($oldMember->image);
                 }
-                $image = $this->uploadOne($params['image'],'menus');
+                $image = $this->uploadOne($params['image'],'members');
             }
 
             $membership = $collection->has('membership') ? 1 : 0;

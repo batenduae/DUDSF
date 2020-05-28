@@ -15,10 +15,11 @@ class CreateMemberImagesTable extends Migration
     {
         Schema::create('member_images', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id');
+            $table->unsignedBigInteger('member_id')->index();
             $table->string('image')->nullable();
             $table->boolean('display')->default(0);
             $table->boolean('share')->default(1);
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->timestamps();
         });
     }

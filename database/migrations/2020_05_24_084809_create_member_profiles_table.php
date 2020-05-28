@@ -15,8 +15,8 @@ class CreateMemberProfilesTable extends Migration
     {
         Schema::create('member_profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id')->unique();
-
+            $table->unsignedBigInteger('member_id')->unique()->index();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->boolean('dudsf_dudaa')->default(1);
             $table->string('email');
             $table->string('password');

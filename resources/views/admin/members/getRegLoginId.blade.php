@@ -8,7 +8,7 @@
         </div>
         @if(Auth::user()->adminType == 'superAdmin')
             <a href="{{ route('admin.members.sendLoginIdMailAll') }}" class="btn btn-primary ">Send Mail to All</a>
-
+            <mail-component></mail-component>
         @endif
     </div>
     @include('admin.partials.flash')
@@ -56,6 +56,7 @@
     </div>
 @endsection
 @push('scripts')
+    <script src="{{ asset('backend/js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>

@@ -19,6 +19,7 @@
                     <li class="nav-item"><a class="nav-link" href="#social-links" data-toggle="tab">Social Links</a></li>
                     <li class="nav-item"><a class="nav-link" href="#analytics" data-toggle="tab">Analytics</a></li>
                     <li class="nav-item"><a class="nav-link" href="#payments" data-toggle="tab">Payments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#others" data-toggle="tab">Others</a></li>
                 </ul>
             </div>
         </div>
@@ -26,6 +27,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="general">
                     @include('admin.settings.includes.general')
+{{--                    <general-settings-component></general-settings-component>--}}
                 </div>
                 <div class="tab-pane fade" id="site-logo">
                     @include('admin.settings.includes.logo')
@@ -42,7 +44,20 @@
                 <div class="tab-pane fade" id="payments">
                     @include('admin.settings.includes.payments')
                 </div>
+                <div class="tab-pane fade" id="others">
+{{--                    @include('admin.settings.includes.others')--}}
+                    <other-settings-component
+{{--                        :per-page="perPage"--}}
+{{--                        :columns="columns"--}}
+                    ></other-settings-component>
+                </div>
             </div>
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="{{ asset('backend/js/app.js') }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>--}}
+{{--    <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>--}}
+{{--    <script type="text/javascript">$('#sampleTable').DataTable();</script>--}}
+@endpush

@@ -15,7 +15,8 @@ class CreateMemberUniversityInfosTable extends Migration
     {
         Schema::create('member_university_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id')->unique();
+            $table->unsignedBigInteger('member_id')->unique()->index();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->string('hons_unit')->nullable();
             $table->boolean('hons_dept_inst')->default(1);
             $table->string('hons_faculty_inst')->nullable();

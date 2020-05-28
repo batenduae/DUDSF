@@ -15,8 +15,8 @@ class CreateMemberContactsTable extends Migration
     {
         Schema::create('member_contacts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id')->unique();
-
+            $table->unsignedBigInteger('member_id')->unique()->index();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->string('permanent_phone1');
             $table->string('permanent_phone2')->nullable();
             $table->string('optional_phone1')->nullable();

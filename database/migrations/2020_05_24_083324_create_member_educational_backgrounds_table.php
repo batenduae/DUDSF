@@ -15,8 +15,8 @@ class CreateMemberEducationalBackgroundsTable extends Migration
     {
         Schema::create('member_educational_backgrounds', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id')->unique();
-
+            $table->unsignedBigInteger('member_id')->unique()->index();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->string('primary_school')->nullable();
             $table->year('primary_year')->nullable();
             $table->decimal('primary_gpa',4,2)->nullable();

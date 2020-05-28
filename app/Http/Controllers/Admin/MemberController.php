@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contracts\MemberContract;
 use App\Http\Controllers\BaseController;
+use App\Models\Member\MemberImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -144,6 +145,42 @@ class MemberController extends BaseController
         return $this->responseRedirectBack('Updated successfully','success',true,true);
     }
 
+    public function actionOnMemberImage($action,$item,$id = null,$memberId = null)
+    {
+        switch ($action){
+            case 'up':
+                $value = 1;
+                break;
+            case 'down':
+                $value = 0;
+                break;
+        }
+        switch ($id){
+            case is_numeric($id):{
+                $justMemberImage = MemberImage::findOrFail($id);
+                $memberImages = [$justMemberImage];
+            } break;
+            case 'all':{
+                $memberImages = MemberImage::where('member_id',$memberId)->get();
+            } break;
+            default:
+                return $this->responseRedirectBack('Nothing Changed','warning',true,true);
+                break;
+        }
+        foreach ($memberImages as $memberImage){
+            switch ($item){
+                case 'display':
+                    $memberImage->display = $value;
+                    break;
+                case 'share':
+                    $memberImage->share = $value;
+                    break;
+            }
+            $memberImage->save();
+        }
+        return $this->responseRedirectBack('Updated successfully','success',true,true);
+    }
+
     public function getRegLoginId()
     {
         $members = $this->memberRepository->listMembers();
@@ -187,10 +224,30 @@ class MemberController extends BaseController
 
     public function editProfile($id)
     {
-        $targetMember = $this->memberRepository->findMemberById($id);
-        $members = $this->memberRepository->listMembers();
-        $this->setPageTitle('Member','Edit Member\'s Profile: '.$targetMember->name);
-        return view('admin.members.profiles.index',compact('members','targetMember'));
+        $member = $this->memberRepository->findMemberById($id);
+        $this->setPageTitle('Member','Edit Member\'s Profile: '.$member ->name);
+        return view('admin.members.profiles.index',compact('member'));
     }
 
+
+    public function sendLoginIdMailAllVue(Request $request)
+    {
+        $members = $members = $this->memberRepository->listMembers();
+        foreach ($members as $member)
+        {
+            if($member->email != null)
+            {
+                $to_name = $member->name;
+                $to_email = $member->email;
+                $data = array('name'=>$member->name, 'registrationId'=>$member->registrationId,'loginId'=>$member->loginId);
+
+                Mail::send('admin.emails.sendLoginIdMail', $data, function($message) use ($to_name, $to_email) {
+                    $message->to($to_email, $to_name)
+                        ->subject('Registration Id & Login ID');
+                    $message->from('dudsf.org@gmail.com','DUDSF');
+                });
+            }
+        }
+        return response()->json(['status' => 'success','message'=>'Setting deleted successfully']);
+    }
 }

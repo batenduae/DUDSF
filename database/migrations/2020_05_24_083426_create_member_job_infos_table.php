@@ -15,8 +15,8 @@ class CreateMemberJobInfosTable extends Migration
     {
         Schema::create('member_job_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('member_id')->unique();
-
+            $table->unsignedBigInteger('member_id')->unique()->index();
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
             $table->boolean('employee')->default(0);
             $table->string('type')->nullable();
             $table->string('name')->nullable();

@@ -36,7 +36,7 @@ class Member extends Model
 //        $this->attributes['registrationId'] = 'dudsf@'.Carbon::now()->format('YmdHs').Str::random(3);
 //        $this->attributes['loginId'] = 'dudsf:'.(Carbon::now()->format('YmdHs')+1500).'-'.Str::random(5);
     }
-    public function pImage(){
+    public function pImages(){
         return $this->hasMany(MemberImage::class,'member_id');
     }
     public function profile(){
